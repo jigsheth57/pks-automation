@@ -34,7 +34,7 @@ jobs:
     - get: config
     - task: credhub-interpolate
       image: platform-automation-image
-      file: config/tasks/credhub-interpolate.yml
+      file: platform-automation-tasks/tasks/credhub-interpolate.yml
       params:
         CREDHUB_CLIENT: ((credhub-client))
         CREDHUB_SECRET: ((credhub-secret))
@@ -47,8 +47,8 @@ jobs:
         interpolated-files: interpolated-config
     - task: download-product
       image: platform-automation-image
-      file: platform-automation-tasks/tasks/download-product.yml
+      file: config/tasks/download-product.yml
       params:
         CONFIG_FILE: download-ops-manager.yaml
       input_mapping:
-        interpolated-files: interpolated-config
+        config: interpolated-config
