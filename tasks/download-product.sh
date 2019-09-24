@@ -4,7 +4,7 @@
 cat /var/version && echo ""
 # set -eux
 pwd
-ls -lga config
+ls -lgaR
 
 vars_files_args=("")
 for vf in ${VARS_FILES}
