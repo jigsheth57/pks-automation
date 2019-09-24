@@ -47,8 +47,8 @@ jobs:
         interpolated-files: interpolated-config
     - task: download-product
       image: platform-automation-image
-      file: config/tasks/download-product.yml
+      file: platform-automation-tasks/tasks/download-product.yml
       params:
-        CONFIG_FILE: download-ops-manager.yaml
+        CONFIG_FILE: download-ops-manager.yml
       input_mapping:
-        secrets: interpolated-config
+        config: interpolated-config
