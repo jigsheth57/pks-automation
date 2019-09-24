@@ -2,7 +2,9 @@
 # code_snippet download-product-script start bash
 
 cat /var/version && echo ""
-set -eux
+# set -eux
+pwd
+ls -lga config
 
 vars_files_args=("")
 for vf in ${VARS_FILES}
@@ -12,8 +14,7 @@ done
 
 # ${vars_files_args[@] needs to be globbed to pass through properly
 # shellcheck disable=SC2068
-pwd
-ls -lga config
+
 om download-product \
    --config config/"${CONFIG_FILE}" ${vars_files_args[@]} \
    --output-directory downloaded-files
