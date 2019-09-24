@@ -2,7 +2,11 @@
 # code_snippet credhub-interpolate-script start bash
 
 cat /var/version && echo ""
-set -euo pipefail
+# set -euo pipefail
+echo $CREDHUB_SERVER
+echo $CREDHUB_CLIENT
+echo $CREDHUB_SECRET
+echo $CREDHUB_CA_CERT
 
 # NOTE: The credhub cli does not ignore empty/null environment variables.
 # https://github.com/cloudfoundry-incubator/credhub-cli/issues/68
