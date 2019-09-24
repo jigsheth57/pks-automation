@@ -51,4 +51,4 @@ jobs:
       params:
         CONFIG_FILE: download-ops-manager.yaml
       input_mapping:
-        config: interpolated-config
+        interpolated-files: interpolated-config

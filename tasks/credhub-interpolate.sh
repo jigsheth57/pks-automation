@@ -3,7 +3,7 @@
 
 cat /var/version && echo ""
 # set -euo pipefail
-ls -lga
+ls -lgaR
 
 # NOTE: The credhub cli does not ignore empty/null environment variables.
 # https://github.com/cloudfoundry-incubator/credhub-cli/issues/68
