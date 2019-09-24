@@ -5,7 +5,7 @@ cat /var/version && echo ""
 # set -eux
 pwd
 ls -lgaR
-cat config/download-ops-manager.yaml
+cat secrets/download-ops-manager.yaml
 
 vars_files_args=("")
 for vf in ${VARS_FILES}
@@ -17,13 +17,13 @@ done
 # shellcheck disable=SC2068
 
 om download-product \
-   --config config/"${CONFIG_FILE}" ${vars_files_args[@]} \
+   --config secrets/"${CONFIG_FILE}" ${vars_files_args[@]} \
    --output-directory downloaded-files
 
 { printf "\nReading product details..."; } 2> /dev/null
 # shellcheck disable=SC2068
 product_slug=$(om interpolate \
-  --config config/"${CONFIG_FILE}" ${vars_files_args[@]} \
+  --config secrets/"${CONFIG_FILE}" ${vars_files_args[@]} \
   --path /pivnet-product-slug)
 
 product_file=$(om interpolate \
