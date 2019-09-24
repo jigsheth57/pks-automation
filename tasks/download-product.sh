@@ -5,8 +5,7 @@ cat /var/version && echo ""
 # set -eux
 pwd
 ls -lgaR
-cat secrets/tasks/credhub-interpolate.yml
-cat secrets/tasks/download-product.yml
+cat config/download-ops-manager.yaml
 
 vars_files_args=("")
 for vf in ${VARS_FILES}
