@@ -36,29 +36,10 @@ jobs:
       image: platform-automation-image
       file: config/tasks/credhub-interpolate.yml
       params:
-        CREDHUB_CLIENT: credhub_admin
-        CREDHUB_SECRET: 2q78w83kom3hmovdpu4a
-        CREDHUB_CA_CERT: |
-          -----BEGIN CERTIFICATE-----
-          MIIDJTCCAg2gAwIBAgIQM8gheCAL/lBoQs2hq5K4wzANBgkqhkiG9w0BAQsFADA8
-          MQwwCgYDVQQGEwNVU0ExFjAUBgNVBAoTDUNsb3VkIEZvdW5kcnkxFDASBgNVBAMT
-          C0NvbmNvdXJzZUNBMB4XDTE5MDkyNDE5NTU1NFoXDTIwMDkyMzE5NTU1NFowPDEM
-          MAoGA1UEBhMDVVNBMRYwFAYDVQQKEw1DbG91ZCBGb3VuZHJ5MRQwEgYDVQQDEwtD
-          b25jb3Vyc2VDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANNG/U1X
-          AECs647W41hhhOhk1YcC0V8BAXJ8dIgtL5eoz5Hkw60SOmuoV9Y/QF69Re39C5jb
-          VW+BWiA0G+VIEX8T/TE+MMzyVWZ62FrJ19svCuot8v57RvZnPA0YFraa7zc1uv9d
-          Tst07thpF2hmvW72fYy1wbp1qAe6qtx+1jl6g9tTkv2EbpuKX8pdZvggh4cwCa4B
-          hYbCcXOU6kN14wciJKAc3zzA8v5g87QvPKXI+1HVlYSZB3gqz5T4KVMoIgTmsidv
-          T2U4CsunkBFycsVZ3EehzYE84Epl+FGYO3c874sPU/xcel0iHRyroD4QQxzvG8hU
-          Nb8G+WbhLxUyjisCAwEAAaMjMCEwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQF
-          MAMBAf8wDQYJKoZIhvcNAQELBQADggEBAC2Tqp8PqYsrZog6ugqKAF9jTOFhNQ+F
-          sMahTklCpr0iASEFrEtZHrMF9oqDgwzexBOBd4Eu0+8dEm7D0A/BbHS/c/wmM0vx
-          V9qHOw6xFupCCAwpIBYvbPx6yUFCbTN+XhJRquxA0pDFEcg8LqV+BOUoMWKGkL5h
-          Y1HGcvgfiQ2HLd0xb9hViT+drDN4EygoWo5xZtoVXIdw3T5aJhEFhYi/KtQAJmPu
-          D76fICI/3WV6lGINqTfYj98Mfib1CDEEOhKUFByJmoOvBMSwxx0o0mdL5EqzGSNq
-          Cl3sYAu5ZQbDQNJfzX689bE3pzi+dkgNs2HIcqGe+3flAkwSUhCQfPU=
-          -----END CERTIFICATE-----
-        CREDHUB_SERVER: https://ci.sys.aws.pcfapps.org
+        CREDHUB_CLIENT: ((credhub-client))
+        CREDHUB_SECRET: ((credhub-secret))
+        CREDHUB_CA_CERT: ((credhub-ca.ca))
+        CREDHUB_SERVER: https://ci.sys.aws.pcfapps.org:8844/
         PREFIX: /concourse/main/pksdemo
       input_mapping:
         files: config
