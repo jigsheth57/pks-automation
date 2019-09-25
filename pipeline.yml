@@ -145,6 +145,11 @@ jobs:
         files: config
       output_mapping:
         interpolated-files: interpolated-config
+    - task: delete-installation
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/delete-installation.yml
+      input_mapping:
+        env: interpolated-config
     - task: delete-vm
       image: platform-automation-image
       file: platform-automation-tasks/tasks/delete-vm.yml
