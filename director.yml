@@ -1,6 +1,8 @@
 az-configuration:
 - name: us-east-1a
+  iaas_configuration_guid: 0e0d105899a53f213ae9
 - name: us-east-1c
+  iaas_configuration_guid: 0e0d105899a53f213ae9
 network-assignment:
   network:
     name: infra
