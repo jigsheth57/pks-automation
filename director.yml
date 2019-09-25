@@ -1,8 +1,15 @@
 az-configuration:
 - name: us-east-1a
-  iaas_configuration_guid: 0e0d105899a53f213ae9
 - name: us-east-1c
-  iaas_configuration_guid: 0e0d105899a53f213ae9
+iaas-configurations:
+- additional_cloud_properties: {}
+  encrypted: false
+  iam_instance_profile: ((ops-manager-iam-instance-profile-name))
+  key_pair_name: pksdemo-ops-manager-key
+  name: default
+  region: us-east-1
+  security_group: sg-0684a838f786bb80b
+  ssh_private_key: ((ops-manager-ssh.private_key))
 network-assignment:
   network:
     name: infra
