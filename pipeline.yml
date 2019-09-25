@@ -19,6 +19,7 @@ resources:
     branch: master
 jobs:
 - name: install-ops-manager
+  public: true
   serial: true
   plan:
     - get: platform-automation-image
@@ -79,7 +80,45 @@ jobs:
             params:
               repository: config-commit
               merge: true
+- name: configure-ops-manager
+  public: true
+  serial: true
+  plan:
+    - get: platform-automation-image
+      resource: platform-automation
+      params:
+        globs: ["*image*.tgz"]
+        unpack: true
+    - get: platform-automation-tasks
+      resource: platform-automation
+      params:
+        globs: ["*tasks*.zip"]
+        unpack: true
+    - get: config
+      passed: [install-ops-manager]
+      trigger: false
+    - task: credhub-interpolate
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/credhub-interpolate.yml
+      params:
+        CREDHUB_CLIENT: ((credhub-client))
+        CREDHUB_SECRET: ((credhub-secret))
+        CREDHUB_CA_CERT: ((credhub-ca.ca))
+        CREDHUB_SERVER: https://ci.sys.aws.pcfapps.org:8844/
+        PREFIX: /concourse/main/pksdemo
+      input_mapping:
+        files: config
+      output_mapping:
+        interpolated-files: interpolated-config
+    - task: configure-authentication
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/configure-authentication.yml
+      attempts: 10
+      input_mapping:
+        env: interpolated-config
+        config: interpolated-config
 - name: remove-ops-manager
+  public: true
   serial: true
   plan:
     - get: platform-automation-image

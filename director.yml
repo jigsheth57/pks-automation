@@ -1,0 +1,109 @@
+az-configuration:
+- name: us-east-1a
+- name: us-east-1c
+network-assignment:
+  network:
+    name: infra
+  other_availability_zones: []
+  singleton_availability_zone:
+    name: us-east-1a
+networks-configuration:
+  icmp_checks_enabled: false
+  networks:
+  - name: infra
+    subnets:
+    - iaas_identifier: subnet-04042c16208a95b29
+      cidr: 10.0.16.0/28
+      dns: 10.0.0.2
+      gateway: 10.0.16.1
+      reserved_ip_ranges: 10.0.16.0-10.0.16.4
+      availability_zone_names:
+      - us-east-1a
+    - iaas_identifier: subnet-01aa7ac3cf534872b
+      cidr: 10.0.16.16/28
+      dns: 10.0.0.2
+      gateway: 10.0.16.17
+      reserved_ip_ranges: 10.0.16.16-10.0.16.20
+      availability_zone_names:
+      - us-east-1c
+  - name: pks
+    subnets:
+    - iaas_identifier: subnet-0b1789997f7d6235e
+      cidr: 10.0.4.0/24
+      dns: 10.0.0.2
+      gateway: 10.0.4.1
+      reserved_ip_ranges: 10.0.4.0-10.0.4.4
+      availability_zone_names:
+      - us-east-1a
+    - iaas_identifier: subnet-0e81a09be0e1e5a32
+      cidr: 10.0.5.0/24
+      dns: 10.0.0.2
+      gateway: 10.0.5.1
+      reserved_ip_ranges: 10.0.5.0-10.0.5.4
+      availability_zone_names:
+      - us-east-1c
+  - name: services
+    subnets:
+    - iaas_identifier: subnet-0b96cb3fa6cb51412
+      cidr: 10.0.8.0/24
+      dns: 10.0.0.2
+      gateway: 10.0.8.1
+      reserved_ip_ranges: 10.0.8.0-10.0.8.4
+      availability_zone_names:
+      - us-east-1a
+    - iaas_identifier: subnet-0b2fa813839ee3754
+      cidr: 10.0.9.0/24
+      dns: 10.0.0.2
+      gateway: 10.0.9.1
+      reserved_ip_ranges: 10.0.9.0-10.0.9.4
+      availability_zone_names:
+      - us-east-1c
+properties-configuration:
+  director_configuration:
+    blobstore_type: local
+    bosh_recreate_on_next_deploy: false
+    bosh_recreate_persistent_disks_on_next_deploy: false
+    database_type: internal
+    director_worker_count: 5
+    encryption:
+      keys: []
+      providers: []
+    hm_emailer_options:
+      enabled: false
+    hm_pager_duty_options:
+      enabled: false
+    identification_tags: {}
+    job_configuration_on_tmpfs: false
+    keep_unreachable_vms: false
+    local_blobstore_options:
+      tls_enabled: true
+    ntp_servers_string: 0.amazon.pool.ntp.org, 1.amazon.pool.ntp.org, 2.amazon.pool.ntp.org,
+      3.amazon.pool.ntp.org
+    post_deploy_enabled: true
+    resurrector_enabled: true
+    retry_bosh_deploys: false
+    skip_director_drain: true
+  dns_configuration:
+    excluded_recursors: []
+    handlers: []
+  security_configuration:
+    opsmanager_root_ca_trusted_certs: true
+    trusted_certificates: "-----BEGIN CERTIFICATE-----\r\n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\r\n-----END
+      CERTIFICATE-----"
+  syslog_configuration:
+    enabled: false
+resource-configuration:
+  compilation:
+    instances: automatic
+    instance_type:
+      id: automatic
+    internet_connected: false
+  director:
+    instances: automatic
+    persistent_disk:
+      size_mb: automatic
+    instance_type:
+      id: automatic
+    internet_connected: false
+vmextensions-configuration: []
+vmtypes-configuration: {}
