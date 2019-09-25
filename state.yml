@@ -1,1 +1,3 @@
-{"iaas": "aws", "vm_id":"i-0ba44fb5aa06ca6c5"}
+---
+iaas: aws
+vm_id: i-0ba44fb5aa06ca6c5
