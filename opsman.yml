@@ -4,7 +4,7 @@ opsman-configuration:
     access_key_id: ((access-key-id))
     secret_access_key: ((secret-access-key))
     region: us-east-1
-    instance_type: m5.large
+    instance_type: t3.large
     vm_name: ops-manager-foundation
     boot_disk_size: 150
     vpc_subnet_id: subnet-0982dc489d51bcf01
