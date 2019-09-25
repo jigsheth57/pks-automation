@@ -12,8 +12,8 @@ opsman-configuration:
     key_pair_name: pksdemo-ops-manager-key
     private_ip: 10.0.16.4
     public_ip: ((ops-manager-public-ip))
-    use_instance_profile: true
-    iam_instance_profile_name: pksdemo_ops_manager
+    # use_instance_profile: true
+    # iam_instance_profile_name: pksdemo_ops_manager
 
 # Note that because this config contains no secrets
 # and is already written to a foundation-specific filepath,
