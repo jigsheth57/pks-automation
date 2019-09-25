@@ -1,12 +1,17 @@
 ---
 opsman-configuration:
   aws:
+    access_key_id: ((access-key-id))
+    secret_access_key: ((secret-access-key))
     region: us-east-1
+    instance_type: t3.large
     vm_name: ops-manager-foundation
+    boot_disk_size: 150
     vpc_subnet_id: subnet-047d33622de3f40c5
     security_group_id: sg-080a94b86992511bb
     key_pair_name: pksdemo-ops-manager-key
     private_ip: 10.0.16.4
+    public_ip: ((ops-manager-public-ip))
     use_instance_profile: true
     iam_instance_profile_name: pksdemo_ops_manager
 
