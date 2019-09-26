@@ -17,8 +17,16 @@ resources:
     uri: ((pipeline-repo))
     private_key: ((plat-auto-pipes-deploy-key.private_key))
     branch: master
+groups:
+- name: "Ops Manager"
+  jobs:
+  - install-n-configure-ops-manager
+  - delete-installation
+- name: "BOSH Director"
+  jobs:
+  - configure-n-deploy-director
 jobs:
-- name: install-ops-manager
+- name: install-n-configure-ops-manager
   public: true
   serial: true
   plan:
@@ -80,44 +88,15 @@ jobs:
             params:
               repository: config-commit
               merge: true
-- name: configure-ops-manager
-  public: true
-  serial: true
-  plan:
-    - get: platform-automation-image
-      resource: platform-automation
-      params:
-        globs: ["*image*.tgz"]
-        unpack: true
-    - get: platform-automation-tasks
-      resource: platform-automation
-      params:
-        globs: ["*tasks*.zip"]
-        unpack: true
-    - get: config
-      passed: [install-ops-manager]
-      trigger: false
-    - task: credhub-interpolate
-      image: platform-automation-image
-      file: platform-automation-tasks/tasks/credhub-interpolate.yml
-      params:
-        CREDHUB_CLIENT: ((credhub-client))
-        CREDHUB_SECRET: ((credhub-secret))
-        CREDHUB_CA_CERT: ((credhub-ca.ca))
-        CREDHUB_SERVER: https://ci.sys.aws.pcfapps.org:8844/
-        PREFIX: /concourse/main/pksdemo
-      input_mapping:
-        files: config
-      output_mapping:
-        interpolated-files: interpolated-config
     - task: configure-authentication
       image: platform-automation-image
       file: platform-automation-tasks/tasks/configure-authentication.yml
-      attempts: 10
+      attempts: 20
       input_mapping:
         env: interpolated-config
         config: interpolated-config
-- name: configure-director
+
+- name: configure-n-deploy-director
   public: true
   serial: true
   plan:
@@ -132,8 +111,8 @@ jobs:
         globs: ["*tasks*.zip"]
         unpack: true
     - get: config
-      passed: [configure-ops-manager]
-      trigger: false
+      passed: [install-n-configure-ops-manager]
+      trigger: true
     - task: credhub-interpolate
       image: platform-automation-image
       file: platform-automation-tasks/tasks/credhub-interpolate.yml
@@ -153,7 +132,13 @@ jobs:
       input_mapping:
         config: interpolated-config
         env: interpolated-config
-- name: remove-ops-manager
+    - task: apply-director-changes
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/apply-director-changes.yml
+      input_mapping:
+        env: interpolated-config
+
+- name: delete-installation
   public: true
   serial: true
   plan:
